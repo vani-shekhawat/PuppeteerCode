@@ -4,6 +4,7 @@ var csvj = require('./csvjson.js');
 var empty = require('./EmptyDir');
 var existence= require('./CheckFileExistence');
 module.exports= async function(vip)
+
 {
 	const browser = await puppeteer.launch({
 		headless:false,
@@ -19,7 +20,7 @@ module.exports= async function(vip)
 	var password_field = '#PasswordPage-PasswordField';
 	var password_submit= '.spectrum-Button-label'; 
 	var email = 'licensing@aisplglobal.com';
-	var password = 'License$135';
+	var password = 'Adobe@135$';
 	await sign(page,auth_url,email_field,email_submit,password_field,password_submit,email,password);
 
 
@@ -40,9 +41,12 @@ module.exports= async function(vip)
 	var download_file = '.icon-download';
 	var file_name = 'customer-details.csv';
 	await download(page,path,download_file, file_name);
-
+    
 	var ret_json= await csvj(path, file_name);
 	console.log(ret_json);
+	browser.close();
+
+	return JSON.stringify(ret_json);
   
 };
 
