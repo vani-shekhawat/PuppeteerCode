@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>User Detail</title>
+		<script type="text/javascript">
+			
+		</script>
+
+	</head>
+	<body>
+		<form action="http://127.0.0.1:8081/user" method="POST">
+			<table>
+				<tr>				
+					<td> Name : </td>
+					<td><input type = "text" required name="name"> </td>
+				</tr>
+				<tr>
+					<td>UserName: </td>
+					<td><input type="email" required name="username"></td>
+				</tr>
+				<tr>
+					<td>Phone:</td>
+					<td><input type="text" id="emp"  name="phone"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" required name="password" minlength="8" maxlength="12">
+					</td>
+				</tr>
+				
+				
+				<tr>
+					
+					<td><input type="submit" >
+						<input type="Reset" >
+					</td>
+				</tr>
+
+			</table>
+			
+		</form>
+
+	</body>
+</html>
