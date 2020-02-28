@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<style>
+		table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		}
+		</style>
+		<title> userlist</title>
+	</head>
+	<body>
+		<form action="./userlist" method="POST">
+			<table id = "poitable" style= "width: 100%">
+				<tr>	
+					<th name = "name" > Name <br>
+					<input type="text" name = "Name" id="nm" > 
+					</th>	
+					<th name = "username"> UserName <br> 
+					<input type="text" name = "username" id="us"  >	
+					</th>
+					<th name = "phone"> Phone <br>
+					<input type="text" name = "phone" id="ph" >	
+					</th>
+					<th name = "password"> Password <br>
+					<input type="text" name = "password"  id="pass"> 
+					</th>
+				</tr>
+			</table>
+		</form>		
+	</body>				    
+
+	<script type="text/javascript">
+		document.querySelector("table").addEventListener('keyup', function ()
+		{
+			if(event.code == "Enter")
+				document.querySelector("form").submit()
+		})
+		var span = document.createElement('span');
+		span.innerHTML = "<%= row%>";
+		var x = span.innerText;
+		if( x!== "")
+		{
+			x_parsed = JSON.parse(x);
+			data = x_parsed[0];
+			data_old = x_parsed[1];
+			data_old_keys = Object.keys(data_old);
+			for (var i = 0 ; i < data_old_keys.length; i++)
+			{
+				document.querySelector('input[name='+data_old_keys[i]+']').value = data_old[data_old_keys[i]];
+			}
+
+			data.forEach(function(value, index){
+				insRow(value);
+			})
+
+			function insRow(dataRow)
+			{
+				var y= document.getElementById('poitable').getElementsByTagName('tbody')[0];
+				var columns = y.rows[0].getElementsByTagName('th');
+				var new_row = y.rows[0].cloneNode();
+				var str = "";
+
+				for(i=0;i<columns.length;i++)
+				{
+					var colName = columns[i].getAttribute('name');
+
+					str+="<td>"+dataRow[colName]+"</td>";
+				}
+				new_row.innerHTML=str;
+			
+				y.appendChild(new_row);
+			}
+		}
+	</script>
+	
+</html>	
